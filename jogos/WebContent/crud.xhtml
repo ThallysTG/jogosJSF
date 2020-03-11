@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Lista de Jogos</title>
+</h:head>
+<h:body>
+	<h:messages style="color:red;margin:8px;" />
+	<h1>--Lista de Jogos--</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome do Jogo:" />
+			<h:inputText value="#{jogosController.jogos.nome}" />
+			<h:outputLabel value="Data de Lancamento:" />
+			<h:inputText value="#{jogosController.jogos.data}" />
+			<h:outputLabel value="Produtora:" />
+			<h:inputText value="#{jogosController.jogos.produtora}" />
+			<h:outputLabel value="Console:" />
+			<h:inputText value="#{jogosController.jogos.console}" />
+
+		</h:panelGrid>
+		
+		<h:commandButton value="Incluir"
+			disabled="#{jogosController.jogos.id != null}"
+			actionListener="#{usuarioController.incluir}" />
+		<h:commandButton value="Alterar" 
+			disabled="#{jogosController.jogos.id == null}"
+			actionListener="#{usuarioController.alterar}"/>
+		<h:commandButton value="Excluir" 
+			disabled="#{jogosController.jogos.id == null}"
+			actionListener="#{usuarioController.remover}"/>
+		<h:commandButton value="Limpar" 
+			actionListener="#{jogosController.limpar}"/>						
+	</h:form>
+	<h:form>
+	<h:dataTable value="#{usuarioController.listaUsuario}" var="obj" >
+   <h:column>            
+      <f:facet name="header">ID</f:facet>            
+      <h:outputLabel value="#{obj.id}" />
+   </h:column>
+   <h:column>
+      <f:facet name="header">Nome</f:facet>
+      <h:outputLabel value="#{obj.nome}" />
+   </h:column>
+   <h:column>
+      <f:facet name="header">Login</f:facet>
+       <h:outputLabel value="#{obj.login}" />
+   </h:column>
+   <h:column>
+      <f:facet name="header">Senha</f:facet>
+       <h:outputLabel value="#{obj.senha}" />
+   </h:column>
+   <h:column>
+      <f:facet name="header">E-mail</f:facet>
+       <h:outputLabel value="#{obj.email}" />
+   </h:column>
+    <h:column>
+      <f:facet name="header">Ação</f:facet>
+       <h:commandLink value="Editar" actionListener="#{usuarioController.editar(obj)}" />
+   </h:column>
+</h:dataTable>
+</h:form>
+	
+</h:body>
+</html>
