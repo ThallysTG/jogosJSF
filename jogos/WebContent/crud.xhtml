@@ -7,7 +7,7 @@
 </h:head>
 <h:body>
 	<h:messages style="color:red;margin:8px;" />
-	<h1>--Lista de Jogos--</h1>
+	<h2>-- Lista de Jogos --</h2>
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome do Jogo:" />
@@ -18,46 +18,59 @@
 			<h:inputText value="#{jogosController.jogos.produtora}" />
 			<h:outputLabel value="Console:" />
 			<h:inputText value="#{jogosController.jogos.console}" />
+			<h:outputLabel value="O jogo possui compras dentro do APP?:" />
+			<h:selectBooleanCheckbox value="#{jogosController.jogos.compras}" />
+			<h:outputLabel value="Descrição:" />
+			<h:inputTextarea value="#{jogosController.jogos.descricao}" />
 
 		</h:panelGrid>
 		
 		<h:commandButton value="Incluir"
 			disabled="#{jogosController.jogos.id != null}"
-			actionListener="#{usuarioController.incluir}" />
+			actionListener="#{jogosController.incluir}" />
 		<h:commandButton value="Alterar" 
 			disabled="#{jogosController.jogos.id == null}"
-			actionListener="#{usuarioController.alterar}"/>
+			actionListener="#{jogosController.alterar}"/>
 		<h:commandButton value="Excluir" 
 			disabled="#{jogosController.jogos.id == null}"
-			actionListener="#{usuarioController.remover}"/>
+			actionListener="#{jogosController.remover}"/>
 		<h:commandButton value="Limpar" 
 			actionListener="#{jogosController.limpar}"/>						
 	</h:form>
 	<h:form>
-	<h:dataTable value="#{usuarioController.listaUsuario}" var="obj" >
+	<h:dataTable value="#{jogosController.listaJogos}" var="obj" >
    <h:column>            
       <f:facet name="header">ID</f:facet>            
       <h:outputLabel value="#{obj.id}" />
    </h:column>
    <h:column>
-      <f:facet name="header">Nome</f:facet>
+      <f:facet name="header">Nome do jogo</f:facet>
       <h:outputLabel value="#{obj.nome}" />
    </h:column>
    <h:column>
-      <f:facet name="header">Login</f:facet>
-       <h:outputLabel value="#{obj.login}" />
+      <f:facet name="header">Data de Lancamento</f:facet>
+       <h:outputLabel value="#{obj.data}" />
    </h:column>
    <h:column>
-      <f:facet name="header">Senha</f:facet>
-       <h:outputLabel value="#{obj.senha}" />
+      <f:facet name="header">Produtora</f:facet>
+       <h:outputLabel value="#{obj.produtora}" />
    </h:column>
    <h:column>
-      <f:facet name="header">E-mail</f:facet>
-       <h:outputLabel value="#{obj.email}" />
+      <f:facet name="header">Console</f:facet>
+       <h:outputLabel value="#{obj.console}" />
+   </h:column>
+      <h:column>
+      <f:facet name="header">Compras</f:facet>
+       <h:outputLabel value="Sim" rendered="#{obj.compras}" />
+       <h:outputLabel value="Não" rendered="#{!obj.compras}" />
+   </h:column>
+      <h:column>
+      <f:facet name="header">Descrição</f:facet>
+       <h:outputLabel value="#{obj.descricao}" />
    </h:column>
     <h:column>
       <f:facet name="header">Ação</f:facet>
-       <h:commandLink value="Editar" actionListener="#{usuarioController.editar(obj)}" />
+       <h:commandLink value="Editar" actionListener="#{jogosController.editar(obj)}" />
    </h:column>
 </h:dataTable>
 </h:form>
